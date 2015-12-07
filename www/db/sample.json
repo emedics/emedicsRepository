@@ -1,0 +1,111 @@
+{
+	"annexes" :[
+	{
+		"name": "Annexe-A",
+		"sections":[
+		 {
+		 	"name": "SectionAA",
+		 	"title" : {"FR" :"XX"},
+		 	"subsections":[
+		 	 {
+		 	 	"title" : {"FR" : "Test"},
+		 	 	"members" :[
+         {
+            "type" : "CHART",
+            "title" : {"FR" : "Chart Test"},
+            "labels" : ["2015-11-5", "2015-11-15", "2015-11-20", "2015-11-30"],
+            "series" : ["Weight"],
+            "items":[[63.5, 65, 64, 66.8]]
+         },
+		 	 	 {
+            "type": "STRING",
+            "title": {"FR": "Nom / Prénom"},
+            "value": ""
+         },
+         {
+            "type": "DATE",
+            "title": {"FR": "Date de la demande (jour, mois, an)"},
+            "value": ""
+         },
+				 {
+            "type": "NUMBER",
+            "title": {"FR": "N°"},
+            "value": "",
+            "min" : 10,
+            "max" : 15
+         },
+         {
+            "type": "OPTION",
+            "title": {"FR": "La personne est-elle membre de l’association du service?"},
+            "items": [
+              {
+                "title": {"FR": "non"},
+                "val": "1"
+              },
+              {
+                "title": {"FR": "oui"},
+                "val": "2"
+              },
+              {
+                "title": {"FR": "a fait la demande"},
+                "val": "3"
+              }
+            ],
+            "value": ""
+         },
+				 {
+            "type": "RADIO",
+            "title": {"FR": "Sexe"},
+            "items": [
+              {
+                "title": {"FR": "masculin"},
+                "val": "1"
+              },
+              {
+                "title": {"FR": "féminin"},
+                "val": "2"
+              }
+            ],
+            "value": ""
+         },
+         {
+            "type": "LONG_STRING",
+            "value": ""
+         },
+         {
+            "type" : "SIGN",
+            "title" : {"FR" : "Signature de la personne responsable du MDS-HC Suisse"},
+            "value" : ""
+         },
+         {
+          	"type": "CHECKBOX",
+          	"title": {"FR": "Prestations demandées (cochez tout ce qui s’applique)"},
+            "items": [
+              {
+                "title": {
+                  "FR": "Evaluer la situation et les besoins"
+                },
+                "value": ""
+              },
+              {
+                "title": {
+                  "FR": "Conseiller"
+                },
+                "value": ""
+              },
+              {
+                "title": {
+                  "FR": "Aider au ménage"
+                },
+                "value": ""
+              }
+           ]
+          }
+		 	 	]
+		 	 }
+		 	]
+		 }		
+		]
+	}
+	]
+}

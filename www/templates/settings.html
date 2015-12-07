@@ -1,0 +1,23 @@
+<ion-view view-title="Sent" name="submit-view">
+
+  <ion-header-bar align-title="center" class="bar-positive">
+    <h1 class="title">Settings</h1>
+  </ion-header-bar>
+
+	<ion-content class="main-content-wrapper" scroll="false">
+	  <ion-list>
+        <ion-item nav-clear menu-close class="item item-icon-left" ng-click="onLogOut()">
+          <i class="icon ion-log-out"></i> Log Out
+        </ion-item>
+        <ion-item class="item-divider">
+          Personal Info
+        </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left">
+          <i class="icon ion-ribbon-b"></i> Profile
+        </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" ng-click="onClear()">
+          <i class="icon ion-aperture"></i> Clear all data
+        </ion-item>
+      </ion-list>
+	</ion-content>
+</ion-view>

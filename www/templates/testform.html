@@ -1,0 +1,102 @@
+<ion-view view-title="FormTest">
+  <ion-header-bar align-title="center" class="bar-positive">
+    <h1 class="title">FormTest</h1>
+  </ion-header-bar>
+
+  <ion-content delegate-handle="my-handle">
+
+    <div class="item section-title" ng-if="temp.section.title != null"> {{temp.section.title.FR}} </div>
+
+    <div class="subsec-member" ng-repeat = "member in temp.section.members">
+
+      <div ng-if="member.type == 'STRING'">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">{{member.title.FR}}</span>
+          <input type="text" ng-model="member.value" ng-change="onChange()">
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'NUMBER'">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">{{member.title.FR}}</span>
+          <input type="number" ng-model="member.value" ng-change="onChange()">
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'DATE'">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label">{{member.title.FR}}</span>
+          <input type="date" ng-model="member.value" ng-change="onChange()" format-date>
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'OPTION'">
+        <label class="item item-input item-stacked-label item-option">
+          <span class="input-label"> {{member.title.FR}} </span>
+          <select ng-model="member.value" ng-init="member.value=member.value||member.items[0].val;onOptioned(member, 1)" ng-options="c.val as c.title.FR for c in member.items" ng-change="onOptioned(member)"></select>
+          <label ng-if="member.items[member.value].description != null">{{member.items[member.value].description.FR}}</label>
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'RADIO'">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"> {{member.title.FR}} </span>
+          <ion-radio-fix ng-repeat="c in member.items" ng-model="member.value" ng-value="c.val" ng-change="onOptioned(member)">{{c.title.FR}}</ion-radio-fix>
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'CHECKBOX'">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label"> {{member.title.FR}} </span>
+          <ion-checkbox ng-repeat="c in member.items" ng-model="c.value" ng-click="onChecked(c)" ng-if="(c.bHidden == undefined) == true || c.bHidden == false">{{c.title.FR}}</ion-checkbox>
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'SIGN'">
+        <div class="item-sign">
+          <span class="input-label" ng-if="member.title != null">{{member.title.FR}}</span>
+          <input signature ng-model="member.value" ng-change="onChange()"></input>
+        </div>
+      </div>
+
+      <div ng-if="member.type == 'LONG_STRING'">
+        <label class="item item-input item-stacked-label">
+          <span class="input-label" ng-if="member.title != null">{{member.title.FR}}</span>
+          <textarea ng-model="member.value" rows = "5" ng-change="onChange()"></textarea>
+        </label>
+      </div>
+
+      <div ng-if="member.type == 'CHART'">
+        <div class="item item-input item-stacked-label">
+
+          <div class ="item-input">
+            <div>{{member.title.FR}}&nbsp;&nbsp;&nbsp;&nbsp;</div>
+            <button ng-click="onChart(member)">Chart</button>
+            <div>&nbsp;&nbsp;</div>
+            <button ng-click="onTable(member)">Table</button>
+          </div>
+
+          <div class="card" ng-if="bChart === 2">
+            <div class="item item-text-wrap">
+              <canvas id="line" class="chart chart-line" data="member.items" labels="member.labels" legend="true" series="member.series" options="{showTooltips: false}"></canvas>
+              </div>
+          </div>
+
+          <div ng-if="bChart === 1">
+            <div class="row header">
+              <div class="col">DATE</div>
+              <div class="col">WEIGHT</div>
+            </div>
+            <div class="row" ng-repeat="data in member.items[0]">
+              <div class="col">{{member.labels[$index]}}</div>
+              <div class="col">{{data}}</div>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </div>
+  </ion-content>
+
+  <button class="button button-icon button-top ion-arrow-up-c" ng-click="onTop(true)">
+  </button>
+</ion-view>

@@ -1,0 +1,29 @@
+<ion-view view-title="Patients">
+
+  <ion-header-bar align-title="center" class="bar-positive">
+    <div class="buttons">
+      <button class="button button-clear icon ion-android-search" ng-click="onSearch()"></button>
+      <i class="button button-clear ion-sort-icon" ng-click="onSort()"></i>
+    </div>
+    <h1 class="title">Patients</h1>
+    <div class="buttons">
+      <button class="button button-clear icon ion-plus-round" ng-click="onNew()"></button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content>
+    <div class="item item-input" ng-if="bSearch == 1">
+      <i class="icon ion-search placeholder-icon"></i>
+      <input class="ion-search-input" type="search" ng-model="model.searchFilter" placeholder="Search by Name">
+      <i class="clear-search icon ion-ios-close-empty" ng-click="onClear()" ng-show="model.searchFilter.length"></i>
+    </div>
+
+    <div class="patient-list" ng-repeat="pat in patients|filter:{name:model.searchFilter}|orderBy:model.sort:model.direct">
+      <div class="item" ng-click="onPatients(pat)">
+        <div class="item-name">{{pat.name}}</div>
+        <div class="item-date">{{pat.date |date:'yyyy-MM-dd &nbsp;&nbsp;HH:mm:ss'}}</div>
+      </div>
+    </div>
+  </ion-content>
+
+</ion-view>

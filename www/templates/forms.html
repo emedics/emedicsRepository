@@ -1,0 +1,183 @@
+<ion-view view-title={{menutitle}}>
+  <ion-nav-buttons side="left">
+    <button class="button button-icon ion-ios-arrow-back" ng-click="onBack()">
+    </button>
+  </ion-nav-buttons>
+
+  <ion-nav-buttons side="primary">
+    <button class="button-icon button-save" ng-click="onSave()">
+    </button>
+  </ion-nav-buttons>
+
+  <div class="item item-input section-select has-header">
+    <div class="input-label section-select-left">Section</div>
+    <div class="section-select-wrapper">
+      <div class="section-list" ng-click="popover.show($event)">&nbsp;{{temp.section.title}}</div>
+      <i class="button button-icon ion-arrow-down-b section-list" ng-click="popover.show($event)"></i>
+    </div>
+    <i class="ion-record section-select-right" ng-style="temp.section.sStatusStyle"></i>
+  </div>
+
+  <ion-content class="section-content" delegate-handle="my-handle">
+
+    <div class="section-mask" ng-show="menus.bLock">
+    </div>
+
+    <!-- you can use lock by using menus.bLock-->
+    
+    <ion-toggle ng-model="temp.section.bCompleted" toggle-class="toggle-balanced" ng-change="onChangeStatus()">Completed</ion-toggle>
+
+    <div ng-repeat="section in temp.section.sections">
+      <div class="item section-title" ng-if="section.title != null"> {{section.title.FR}} </div>
+      <div ng-repeat = "subsec in section.subsections" ng-if="(subsec.bHidden == undefined) == true || subsec.bHidden == false">
+
+        <div class="item subsec-title" ng-if="subsec.title != null"> 
+        {{subsec.title.FR}}
+          <div class="subsec-desc" ng-if="subsec.description != null">
+            <br>{{subsec.description.FR}}
+          </div>
+        </div>
+        <div class="subsec-member" ng-repeat = "member in subsec.members">
+
+          <div ng-if="member.type == 'TABLE'">
+            <div class="item item-table item-stacked-label">
+              <span class="input-label" ng-if="member.title != null">{{member.title.FR}}</span>
+              <div ng-repeat="mem in member.items">
+
+                <div ng-if="mem.type == 'STRING'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{mem.title.FR}}</span>
+                    <input type="text" ng-model="mem.value" ng-change="onChange()">
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'NUMBER'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{mem.title.FR}}</span>
+                    <input type="number" ng-model="mem.value" ng-change="onChange()">
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'DATE-DAY'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{mem.title.FR}}</span>
+                    <input type="date" ng-model="mem.value" ng-change="onDay(mem)" format-date>
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'DAY'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{mem.title.FR}}</span>
+                    <input type="text" ng-model="mem.value" ng-change="onChange()">
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'TIME'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{mem.title.FR}}</span>
+                    <ionic-timepicker input-obj="timePickerObject">
+                      <input type="text" ng-model="mem.value" ng-click = "onTime(mem)">
+                    </ionic-timepicker>
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'RADIO'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label"> {{mem.title.FR}} </span>
+                    <ion-radio-fix ng-repeat="c in mem.items" ng-change="onChange()" ng-model="mem.value" ng-value="c.val">{{c.title.FR}}</ion-radio-fix>
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'DATE'">
+                  <label class="item item-input item-stacked-label">
+                    <span class="input-label">{{mem.title.FR}}</span>
+                    <input type="date" ng-model="mem.value" ng-change="onChange()" format-date>
+                  </label>
+                </div>
+
+                <div ng-if="mem.type == 'SIGN'">
+                  <div class="item-sign">
+                    <span class="input-label" ng-if="mem.title != null">{{mem.title.FR}}</span>
+                    <input signature ng-model="mem.value" ng-change="onChange()"></input>
+                  </div>
+                </div>
+
+                <div ng-if="mem.type == 'OPTION'">
+                  <label class="item item-input item-stacked-label item-option">
+                    <span class="input-label"> {{mem.title.FR}} </span>
+                    <select ng-model="mem.value" ng-init="mem.value=mem.value||mem.items[0].val;onOptioned(mem, 1)" ng-options="c.val as c.title.FR for c in mem.items" ng-change="onOptioned(mem)"></select>
+                    <label ng-if="mem.items[mem.value].description != null">{{mem.items[mem.value].description.FR}}</label>
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div ng-if="member.type == 'STRING'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">{{member.title.FR}}</span>
+              <input type="text" ng-model="member.value" ng-change="onChange()">
+            </label>
+          </div>
+
+          <div ng-if="member.type == 'NUMBER'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">{{member.title.FR}}</span>
+              <input type="number" ng-model="member.value" ng-change="onChange()">
+            </label>
+          </div>
+
+          <div ng-if="member.type == 'DATE'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">{{member.title.FR}}</span>
+              <input type="date" ng-model="member.value" ng-change="onChange()" format-date>
+            </label>
+          </div>
+
+          <div ng-if="member.type == 'OPTION'">
+            <label class="item item-input item-stacked-label item-option">
+              <span class="input-label"> {{member.title.FR}} </span>
+              <select ng-model="member.value" ng-init="member.value=member.value||member.items[0].val;onOptioned(member, 1)" ng-options="c.val as c.title.FR for c in member.items" ng-change="onOptioned(member)"></select>
+              <label ng-if="member.items[member.value].description != null">{{member.items[member.value].description.FR}}</label>
+            </label>
+          </div>
+
+          <div ng-if="member.type == 'RADIO'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label"> {{member.title.FR}} </span>
+              <ion-radio-fix ng-repeat="c in member.items" ng-model="member.value" ng-value="c.val" ng-change="onOptioned(member)">{{c.title.FR}}</ion-radio-fix>
+            </label>
+          </div>
+
+          <div ng-if="member.type == 'CHECKBOX'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label"> {{member.title.FR}} </span>
+              <ion-checkbox ng-repeat="c in member.items" ng-model="c.value" ng-click="onChecked(c)" ng-if="(c.bHidden == undefined) == true || c.bHidden == false">{{c.title.FR}}</ion-checkbox>
+            </label>
+          </div>
+
+          <div ng-if="member.type == 'SIGN'">
+            <div class="item-sign">
+              <span class="input-label" ng-if="member.title != null">{{member.title.FR}}</span>
+              <input signature ng-model="member.value" ng-change="onChange()"></input>
+            </div>
+          </div>
+
+          <div ng-if="member.type == 'LONG_STRING'">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label" ng-if="member.title != null">{{member.title.FR}}</span>
+              <textarea ng-model="member.value" rows = "5" ng-change="onChange()"></textarea>
+            </label>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+  <button class="button button-icon button-top ion-arrow-up-c" ng-click="onTop(true)"/>
+  <button class="button button-icon button-previous ion-arrow-left-c" ng-click="onPrevious()" ng-if = "nCurInd > 0"/>
+  <button class="button button-icon button-next ion-arrow-right-c" ng-click="onNext()" ng-if = "nCurInd < nCurCnt - 1" />
+
+</ion-view>

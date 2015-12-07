@@ -1,0 +1,21 @@
+<ion-view view-title="Draft" name="submit-view">
+
+  <ion-header-bar align-title="center" class="bar-positive">
+    <h1 class="title">Draft</h1>
+  </ion-header-bar>
+
+  <ion-content>
+    <ion-list>
+        <div ng-repeat="pat in patients">
+          <div ng-repeat="mnu in pat.menus">
+          <ion-item ng-click="onPatients(pat, $index)" ng-if="mnu.date != null">
+            <div class="item-name">{{onTitle(mnu.title.FR, 9)}} &nbsp;-&nbsp;&nbsp; {{onTitle(pat.name, 7)}}</div>
+
+            <div class="item-date">{{mnu.date |date:'yyyy-MM-dd &nbsp;&nbsp;HH:mm:ss'}}</div>
+            <ion-option-button class="delete-button button button-icon ion-minus-circled" ng-click="onItemDelete1(pat, $index)"></ion-option-button>
+          </ion-item>
+          </div>
+        </div>
+    </ion-list>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,194 @@
+{
+	"menus" : [
+	{
+		"title" :{"FR" : "ADMIN DATA"},
+		"sections" :[
+		{
+			"title" : "Section BB(Annexe A)",
+			"aneID" : 0,
+			"secID" : 1
+		},
+		{
+			"title" : "Section CC(Annexe A)",
+			"aneID" : 0,
+			"secID" : 2
+		},
+		{
+			"title" : "All sections of Annexe D",
+			"aneID" : 3,
+			"secID" : -1
+		}]
+	},
+	{
+		"title" :{"FR" : "MEDICAL REQUESTS"},
+		"sections" : [
+		{
+			"title" : "Section AA(Annexe A)",
+			"aneID" : 0,
+			"secID" : 0
+		},
+		{
+			"title" : "Section DD(Annexe A)",
+			"aneID" : 0,
+			"secID" : 3
+		},
+		{
+			"title" : "Section EE(Annexe A)",
+			"aneID" : 0,
+			"secID" : 4
+		},
+		{
+			"title" : "Section FF(Annexe A)",
+			"aneID" : 0,
+			"secID" : 5
+		},
+		{
+			"title" : "Section GG(Annexe A)",
+			"aneID" : 0,
+			"secID" : 6
+		}]
+	},
+	{
+		"title" :{"FR" : "MDS EVALUATIONS"},
+		"sections" : [
+		{
+			"title" : "Section A(Annexe C)",
+			"aneID" : 2,
+			"secID" : 0
+		},
+		{
+			"title" : "Section B(Annexe C)",
+			"aneID" : 2,
+			"secID" : 1
+		},
+		{
+			"title" : "Section C(Annexe C)",
+			"aneID" : 2,
+			"secID" : 2
+		},
+		{
+			"title" : "Section D(Annexe C)",
+			"aneID" : 2,
+			"secID" : 3
+		},
+		{
+			"title" : "Section E(Annexe C)",
+			"aneID" : 2,
+			"secID" : 4
+		},
+		{
+			"title" : "Section F(Annexe C)",
+			"aneID" : 2,
+			"secID" : 5
+		},
+		{
+			"title" : "Section G(Annexe C)",
+			"aneID" : 2,
+			"secID" : 6
+		},
+		{
+			"title" : "Section H(Annexe C)",
+			"aneID" : 2,
+			"secID" : 7
+		},
+		{
+			"title" : "Section I(Annexe C)",
+			"aneID" : 2,
+			"secID" : 8
+		},
+		{
+			"title" : "Section J(Annexe C)",
+			"aneID" : 2,
+			"secID" : 9
+		},
+		{
+			"title" : "Section K(Annexe C)",
+			"aneID" : 2,
+			"secID" : 10
+		},
+		{
+			"title" : "Section L(Annexe C)",
+			"aneID" : 2,
+			"secID" : 11
+		},
+		{
+			"title" : "Section M(Annexe C)",
+			"aneID" : 2,
+			"secID" : 12
+		},
+		{
+			"title" : "Section N(Annexe C)",
+			"aneID" : 2,
+			"secID" : 13
+		},
+		{
+			"title" : "Section O(Annexe C)",
+			"aneID" : 2,
+			"secID" : 14
+		},
+		{
+			"title" : "Section P(Annexe C)",
+			"aneID" : 2,
+			"secID" : 15
+		},
+		{
+			"title" : "Section Q(Annexe C)",
+			"aneID" : 2,
+			"secID" : 16
+		},
+		{
+			"title" : "Section R(Annexe C)",
+			"aneID" : 2,
+			"secID" : 17
+		},
+		{
+			"title" : "Section S(Annexe C)",
+			"aneID" : 2,
+			"secID" : 18
+		}]
+	},
+	{
+		"title" :{"FR" : "HOMECARE EVALUATIONS"},
+		"sections" : [
+		{
+			"title" : "Section U1(Annexe B)",
+			"aneID" : 1,
+			"secID" : 0
+		},
+		{
+			"title" : "Section U2(Annexe B)",
+			"aneID" : 1,
+			"secID" : 1
+		},
+		{
+			"title" : "Section U3(Annexe B)",
+			"aneID" : 1,
+			"secID" : 2
+		},
+		{
+			"title" : "Section U4(Annexe B)",
+			"aneID" : 1,
+			"secID" : 3
+		},
+		{
+			"title" : "Section U5(Annexe B)",
+			"aneID" : 1,
+			"secID" : 4
+		},
+		{
+			"title" : "Section U6(Annexe B)",
+			"aneID" : 1,
+			"secID" : 5
+		},
+		{
+			"title" : "Section U7(Annexe B)",
+			"aneID" : 1,
+			"secID" : 6
+		},
+		{
+			"title" : "Section U8(Annexe B)",
+			"aneID" : 1,
+			"secID" : 7
+		}]
+	}]
+}

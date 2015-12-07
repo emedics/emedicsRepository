@@ -1,0 +1,495 @@
+/*
+        Common CSS
+*/
+
+.content {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.center-wrapper .scroll {
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.center-content {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.input-label {
+    padding: 6px 10px 7px 0px;
+    width: 25%;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.section-list {
+    color: #227ca2;
+}
+
+.item-select select {
+    font-size: 0.8rem;
+    padding: 0 48px 0 0px;
+}
+
+.center-input {
+    margin-left: 10%;
+    width: 80%;
+    border: 1px solid #aaa !important;
+    margin-bottom: 10px;
+    padding: 10px !important;
+    border-radius: 4px;
+}
+
+.clickable-button {
+    width: 80%;
+    margin-top: 10px;
+    background: #227ca2;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-color: #227ca2;
+    color: white;
+}
+
+/*.button {
+    color: white !important;
+}*/
+
+.bar.bar-positive {
+    border-color: #227ca2;
+    background-color: #227ca2;
+    color: #fff;    
+}
+
+.has-header {
+    background-color: #fff;
+}
+
+/*
+        Tabs
+*/
+
+.tab-nav {
+    top: auto !important;
+    bottom: 0px;
+    background-color: #eee !important;
+}
+
+/*
+        Splash Page
+*/
+
+.splash-content {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.splash-logo {
+    width: 60%;
+}
+
+.splash-content-wrapper {
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.splash-logo {
+    width: 60%;
+    position: relative;
+    top: -30px;
+}
+
+/*
+        Sign In Page
+*/
+
+.signin-content {
+    text-align: center;
+}
+
+.signin-content .logo {
+    width: 60%;
+    margin-bottom: 10%;
+}
+
+.button-area {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.signin-content .center-label {
+    margin-bottom: 10px;
+}
+
+.signin-content-wrapper {
+    position: absolute;
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+/*
+        Home Page
+*/
+.main-content-wrapper {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.main-content {
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.main-button {
+    padding: 20px 0px;
+    margin-bottom: 15px;
+    width: 80%;
+    line-height: 0px;
+}
+
+.ion-sort-icon {    
+    content: url("../img/sort.png");
+    width : 30px;
+    height: 30px;
+}
+
+/*
+    Patient List Page
+*/
+
+.patient-list .item {
+    padding: 7px 16px;
+}
+
+.patient-list .item.has-delete-button {
+    min-height: 50px;
+    height: 60px;
+}
+
+.ion-search-input {
+    padding-right: 5px !important;
+}
+
+.clear-search {
+    font-size: 1.2rem;
+    padding: 10px;
+}
+
+.item-date {
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.item-date.has-delete-button {
+    display: inline-block;
+}
+
+.button-delete {
+    float: right;
+    bottom: 20px;
+    right: -20px;
+    color: #F94B4B !important;
+}
+
+/*
+        Form Page
+*/
+
+.header .col {
+  background-color:lightgrey;
+}
+
+.col {
+  border: solid 1px grey;
+  border-bottom-style: none;
+  border-right-style: none;
+}
+
+.col:last-child {
+  border-right: solid 1px grey;
+}
+
+.row:last-child .col {
+  border-bottom: solid 1px grey;
+}
+
+.item-radio input:checked + .radio-content .item-content {
+/* style the item content when its checked */
+    background: #f7f7f7; 
+
+}
+
+.item-radio input:checked + .radio-content .radio-icon {
+/* show the checkmark icon when its checked */
+    visibility: visible;
+
+}
+
+.button-save {
+    position: absolute;
+    right: 40px;
+    bottom: 5px;
+    height: 32px;
+    width: 32px;
+    background-image: url('../img/save-icon1.png');
+    background-repeat: no-repeat;
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+  .button-save {
+    right: 140px!important;
+  }
+}
+
+@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape) {
+  .button-save {
+     right: 210px!important;
+   }
+}
+.button-previous {
+    position: absolute;
+    bottom: 70px;
+    right: 45px;
+    border: 1px solid black;
+    border-radius: 14px;
+    height: 29px;
+    min-height: 22px;
+    line-height: 28px;
+    color: white !important;
+    background: black !important;
+    opacity: 0.2;
+    font-size: 1.6rem;   
+    width: 29px;
+    min-width: 22px;
+}
+
+.button-next {
+    position: absolute;
+    bottom: 70px;
+    right: 5px;
+    border: 1px solid black;
+    border-radius: 14px;
+    height: 29px;
+    min-height: 22px;
+    line-height: 28px;
+    color: white !important;
+    background: black !important;
+    opacity: 0.2;
+    font-size: 1.6rem;   
+    width: 29px;
+    min-width: 22px;
+}
+
+.button-top {
+    position: absolute;
+    bottom: 105px;
+    right: 25px;
+    border: 1px solid black;
+    border-radius: 14px;
+    height: 29px;
+    min-height: 22px;
+    line-height: 28px;
+    color: white !important;
+    background: black !important;
+    opacity: 0.2;
+    font-size: 1.6rem;   
+}
+
+.section-select {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    border: 0px;
+    border-bottom: 1px solid #ddd;
+}
+
+.section-select-left {
+    position: absolute;
+    left: 20px;
+    top: 4px;
+}
+
+.section-select-wrapper {
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    left: 0px;
+    top: 0px;
+}
+
+.section-select-wrapper div {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 0px;
+    font-size: 0.9rem;
+    margin-left: 30px;
+}
+
+.section-select-right {
+    position: absolute;
+    right: 15px;
+    margin-top: 5px;
+}
+
+.section-content {
+    padding-top: 40px;
+}
+
+.section-title {
+    font-size: 0.9rem;
+    font-weight: bold;
+    white-space: normal;
+    text-align: center;
+}
+
+.section-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-top: 52px;
+    z-index: 99999;
+    opacity: 0.5;
+    background-color: white;
+}
+
+.subsec-title {
+    font-size: 0.8rem;
+    font-weight: bold;
+    white-space: normal;
+}
+
+.subsec-desc {
+    font-weight: 400;
+}
+
+.subsec-member {
+    padding: 0px 20px;
+}
+
+.subsec-member label {
+    padding: 8px;
+}
+
+.subsec-member .input-label {
+    display: block;
+    font-size: 0.7rem;
+    white-space: pre;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.subsec-member label input {
+    border: 1px solid #aaa;
+    padding: 0px 10px;
+    font-size: 0.7rem;
+}
+
+.subsec-member .item-table {
+    padding: 8px;
+}
+
+.subsec-member .item-option {
+    display: block;
+}
+
+.subsec-member .item-option span {
+    display: block;
+}
+
+.subsec-member .item-option select {
+    display: block;
+    width: 100%;
+}
+
+.subsec-member .item-sign {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.subsec-member .item-sign img {
+    border: 1px solid #ddd;
+}
+
+.subsec-member label label {
+    font-size: 0.7rem;
+}
+
+.subsec-member textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+.menu-item {
+    font-size: 0.8rem;
+}
+
+.modal {
+    background: transparent;
+}
+
+.m-signature-pad {
+    width: 80%;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    margin-left: 10%;
+    margin-top: 40%;
+    padding: 10px;
+    text-align: center;
+    background: #ddd;
+}
+
+.m-signature-pad--body {
+    border: 1px solid #aaa;
+}
+
+.m-signature-pad--desc {
+    margin: 10px 0px;
+}
+
+.m-signature-pad--canvas {
+    width: 100%;
+    height: 100px;
+}
+
+.subsec-member .item-checkbox {
+    border: none;
+    padding: 13px 5px 13px 50px !important;
+}
+/*
+    Popup Page
+*/
+
+.item-popup{
+    padding: 15px!important
+}
+/*
+    Draft Page
+*/
+
+.delete-button {
+    color: red;
+    font-size: 30px;
+}
+
+/*
+    Medical Request
+*/
+
+.button-plus{
+    position: absolute;
+    right: 40px;
+    bottom: 7px;
+    height: 30px;
+    width: 30px;
+}
