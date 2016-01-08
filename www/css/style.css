@@ -28,7 +28,7 @@
 }
 
 .section-list {
-    color: #227ca2;
+    font-weight: bold;
 }
 
 .item-select select {
@@ -243,7 +243,7 @@
     background-repeat: no-repeat;
 }
 
-@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
+/*@media only screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait) {
   .button-save {
     right: 140px!important;
   }
@@ -253,7 +253,7 @@
   .button-save {
      right: 210px!important;
    }
-}
+}*/
 .button-previous {
     position: absolute;
     bottom: 70px;
@@ -465,6 +465,7 @@
 .subsec-member .item-checkbox {
     border: none;
     padding: 13px 5px 13px 50px !important;
+    font-size: 11px;
 }
 /*
     Popup Page

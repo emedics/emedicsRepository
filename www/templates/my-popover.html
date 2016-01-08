@@ -3,7 +3,7 @@
 	  <div ng-repeat="sec in selsections" ng-if="(sec.sections[0].bHidden == undefined) == true || sec.sections[0].bHidden == true">
       	<div class="item-input item-popup" ng-click="onSelectChanged($index)">
       		<i class="ion-record" ng-style="sec.sStatusStyle"></i>
-      		<div>&nbsp;{{sec.title}}</div>
+      		<div ng-class="$index === nCurInd ? 'section-list' : ''">&nbsp;{{sec.title}}</div>
       	</div>
       </div>
 	</ion-content>

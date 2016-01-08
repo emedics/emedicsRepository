@@ -4,6 +4,7 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 	$scope.bNew = 0;
 	var bActive = true;
 	$scope.$on('$ionicView.enter', function() {
+		$ionicViewSwitcher.nextDirection('previous');
 		$scope.timePickerObject = {
 		  inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
 		  step: 15,  //Optional
@@ -23,6 +24,7 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		if (gApp.patient.menus === null)
 		{
 			var data = {};
+			$ionicLoading.show();
 	        HttpGet(HttpService.getLocalURL("JSON_Menu.json"), data, function(resp, error) {
 	            if (error) {
 	            	$ionicLoading.hide();
@@ -74,7 +76,6 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 			    }
 	      	}
 		    $scope.onSelectChanged(-1);
-		    $ionicLoading.hide();
 		    $timeout(function() {
 			    gApp.patient.menus[gApp.patient.bMnuID] = angular.copy($scope.menus);
 			}, 50);
@@ -116,14 +117,6 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 	};
 
 	$scope.saveToStorage = function(){
-		var i;
-		for (i = 0; i < $scope.menus.sections.length; i++)
-			if ($scope.menus.sections[i].sStatus != 3)
-				break;
-		if (i == $scope.menus.sections.length)
-			$scope.menus.bLock = true;
-		else
-			$scope.menus.bLock = false;
 		$scope.menus.date = new Date();
 		gApp.patient.menus[gApp.patient.bMnuID] = angular.copy($scope.menus);
 
@@ -161,46 +154,17 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 			Utils.confirmPopupYesNo('Warning', 'Do you want to save current working form now?', 
 				function(){
 					$scope.saveToStorage();
-					if (gApp.bFromPatients == 1)
-					{
-						$ionicLoading.show();
-						$state.go('tabs.patients');
-					}
-					else
-					{
-						$ionicLoading.show();
-						$state.go('tabs.draft');
-					}
+					$ionicHistory.goBack();
 		       	},
 		       	function(){
-					if (gApp.bFromPatients == 1)
-					{
-						$ionicLoading.show();
-						$state.go('tabs.patients');
-					}
-					else{
-						$ionicLoading.show();
-						$state.go('tabs.draft');
-					}
+					$ionicHistory.goBack();
 		       	});
 		}
 		else
-		{
-			if (gApp.bFromPatients == 1)
-			{
-				$ionicLoading.show();
-				$state.go('tabs.patients');
-			}
-			else
-			{
-				$ionicLoading.show();
-				$state.go('tabs.draft');
-			}
-		}
+			$ionicHistory.goBack();
 	};
 
     $scope.onSelectChanged = function(nInd) {
-    	$ionicLoading.show();
     	if (nInd === -1)
     	{
     		$scope.menutitle = $scope.menus.title.FR;
@@ -218,7 +182,6 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 				gApp.patient.menus[gApp.patient.bMnuID] = angular.copy($scope.menus);
 			}, 51);
 	    }
-	    $ionicLoading.hide();
     };
 
     $scope.$on("MenuSelected", function (event, index) {
@@ -230,19 +193,16 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 				function(){
 					$scope.saveToStorage();
 					gApp.patient.bMnuID = index;
-					$ionicLoading.show();
 					$state.go($state.current, {}, {reload: true});
 		       	},
 		       	function(){
 		       		gApp.patient.bMnuID = index;
-		       		$ionicLoading.show();
 		       		$state.go($state.current, {}, {reload: true});
 		       	});
 		}
 		else
 		{
 			gApp.patient.bMnuID = index;
-			$ionicLoading.show();
 			$state.go($state.current, {}, {reload: true});
 		}
 	})
@@ -251,15 +211,12 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		switch(index)
 		{
 			case 0:
-				$ionicLoading.show();
 				$state.go('tabs.main');
 				break;
 			case 1:
-				$ionicLoading.show();
 				$state.go('tabs.draft');
 				break;
 			case 2:
-				$ionicLoading.show();
 				$state.go('tabs.sent');
 				break;
 			case 3:
@@ -298,6 +255,16 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		}
 		item.bHidden = false;
 	}
+	onGotoS = function(item, temp)
+	{
+		var i = 0;
+		while (!angular.equals(temp[i], item))
+		{
+			if (i != $scope.nCurInd)
+				temp[i].sections[0].bHidden = false;
+			i++;
+		}
+	}
 	onActive = function(temp){
 		for (var i = 0;i < temp.length; i++)
 		{
@@ -330,7 +297,10 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 						{
 							if (type === "GOTO" && bInit != 1)
 							{
-								$scope.onSelectChanged(i);
+								if (index === -3)
+									onGotoS($scope.menus.sections[i], $scope.menus.sections, value);
+								else
+									$scope.onSelectChanged(i);
 								return;
 							}
 						}
@@ -374,15 +344,37 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 			j++;
 		}while(1 > 0);
 	}
-	$scope.onChecked = function(sitem){
+	function unCheck(member){
+		for (var i = 0; i < member.items.length; i++)
+			member.items[i].value = false;
+	}
+	$scope.onChecked = function(sitem, member){
 		if (sitem.type != "SHIDE" && sitem.type != "GOTO") return;
-		if (sitem.value === false && sitem.type == "GOTO") return;
+		if (sitem.type === "GOTO" && sitem.value === false) 
+		{
+			$scope.bLock = false;
+			return;
+		}
+		if (sitem.value === true && $scope.bLock === true)
+		{
+			sitem.value = false;
+			return;
+		}
+		if (sitem.type === "GOTO" && sitem.value === true) 
+		{
+			$scope.bLock = true;
+			unCheck(member);
+			sitem.value = true;
+		}
 
-		$scope.temp.section.sStatus = 2;
-		$scope.temp.section.sStatusStyle = {'color' : 'blue'};
 		var nInd = sitem.flow.indexOf(',');
 		if (nInd === -1)
-			getObject(sitem.type, sitem.flow, 1, sitem.value);
+		{
+			if (sitem.type === "GOTO")
+				getObject(sitem.type, sitem.flow, -3, sitem.value);
+			else
+				getObject(sitem.type, sitem.flow, 1, sitem.value);
+		}
 		else
 		{
 			var temp = angular.copy(sitem.flow),j = 0;
@@ -403,8 +395,6 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		if (item.type != "SHIDE" && item.type != "GOTO") return;
 		var nInd = item.flow.indexOf(','), value = true;
 
-		$scope.temp.section.sStatus = 2;
-		$scope.temp.section.sStatus = {'color' : 'blue'};
 		if (sitem.type === "RADIO") value = item.value;
 		if (nInd === -1)
 			getObject(item.type, item.flow, 1, value, bInit);
@@ -438,6 +428,7 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		}
 	}
 	$scope.onChange = function(){
+		$scope.temp.section.bCompleted = false;
 		$scope.temp.section.sStatus = 2;
 		$scope.temp.section.sStatusStyle = {'color' : 'blue'};
 	}
@@ -448,13 +439,9 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 			item.value = "";
 		else
 			item.value = moment().locale(gApp.langu.split('-')[0]).isoWeekday(mem.value.getDay()).format('ddd');
-		$scope.temp.section.sStatus = 2;
-		$scope.temp.section.sStatusStyle = {'color' : 'blue'};
 	}
 	$scope.onTime = function(mem){
 		$scope.mTime = mem;
-		$scope.temp.section.sStatus = 2;
-		$scope.temp.section.sStatusStyle = {'color' : 'blue'};
 	}
 	$scope.getNumber = function(num) {
     	return new Array(num);   

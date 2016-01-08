@@ -1009,7 +1009,7 @@
                   "title": {
                     "FR": "c. Rendez-vous non fixé, est prévu dans les ..... jours"
                   },
-                  "value": 0
+                  "value": ""
                 }
               ]
             },
@@ -1592,14 +1592,14 @@
                   "type" : "TABLE",
                   "title" : {"FR" : "Salon, séjour"},
                   "items" : [{
-                    "type" : "STRING",
+                    "type" : "NUMBER",
                     "title" : {"FR" : "Nb"},
-                    "value" : "re"
+                    "value" : ""
                   },
                   {
-                    "type" : "STRING",
+                    "type" : "NUMBER",
                     "title" : {"FR" : "Fréquence"},
-                    "value" : "pved"
+                    "value" : ""
                   },
                   {
                     "type" : "STRING",
@@ -1613,12 +1613,12 @@
                   "items" : [{
                     "type" : "NUMBER",
                     "title" : {"FR" : "Nb"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "NUMBER",
                     "title" : {"FR" : "Fréquence"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "STRING",
@@ -1632,12 +1632,12 @@
                   "items" : [{
                     "type" : "NUMBER",
                     "title" : {"FR" : "Nb"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "NUMBER",
                     "title" : {"FR" : "Fréquence"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "STRING",
@@ -1651,12 +1651,12 @@
                   "items" : [{
                     "type" : "NUMBER",
                     "title" : {"FR" : "Nb"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "NUMBER",
                     "title" : {"FR" : "Fréquence"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "STRING",
@@ -1674,12 +1674,12 @@
                   {
                     "type" : "NUMBER",
                     "title" : {"FR" : "Nb"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "NUMBER",
                     "title" : {"FR" : "Fréquence"},
-                    "value" : 0
+                    "value" : ""
                   },
                   {
                     "type" : "STRING",
@@ -3209,7 +3209,7 @@
                     {
                     "type" : "NUMBER",
                     "title" : {"FR" : "Nb. heures/ semaine"},
-                    "value" : 0
+                    "value" : ""
                     }]
                 }]
             },
@@ -4969,12 +4969,12 @@
                 {
                   "type" : "NUMBER",
                   "title" : {"FR" : "taille (cm)"},
-                  "value" : 0
+                  "value" : ""
                 },
                 {
                   "type" : "NUMBER",
                   "title" : {"FR" : "poids (kg)"},
-                  "value" : 0
+                  "value" : ""
                 }]
             },
             {

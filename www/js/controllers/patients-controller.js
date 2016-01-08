@@ -1,5 +1,5 @@
 
-MyApp.controller('PatientsCtrl', function($scope, $ionicLoading, $ionicViewSwitcher, $http, $ionicPopup, $ionicHistory, $state, $timeout, gApp, Utils) {
+MyApp.controller('PatientsCtrl', function($scope, $ionicViewSwitcher, $http, $ionicPopup, $ionicHistory, $state, $timeout, gApp, Utils) {
     // event whenever enter the home screen.
     $scope.$on('$ionicView.enter', function(viewInfo, state) {
         //gApp.clearAllInfo();
@@ -13,9 +13,7 @@ MyApp.controller('PatientsCtrl', function($scope, $ionicLoading, $ionicViewSwitc
         $scope.bOrder = -1;
         $scope.personSearch = {name:''};
         gApp.loadAllInfo();
-        gApp.bFromPatients = 1;
         $scope.patients = gApp.patients.list;
-        $ionicLoading.hide();
     });
 
     $scope.onNew = function(){
@@ -23,9 +21,10 @@ MyApp.controller('PatientsCtrl', function($scope, $ionicLoading, $ionicViewSwitc
 
     	gApp.patient.menus = null;
         gApp.patient.bMnuID = 0;
+        gApp.bForm = true;
 
         gApp.saveAllInfo();
-        $ionicLoading.show();
+        $ionicHistory.clearHistory();
       	$state.go('tabs.menu.forms');
     };
 
@@ -36,7 +35,8 @@ MyApp.controller('PatientsCtrl', function($scope, $ionicLoading, $ionicViewSwitc
     $scope.onPatients = function(pa){
     	gApp.patient = pa;
         gApp.patient.bMnuID = 0;
-        $ionicLoading.show();
+        gApp.bForm = true;
+        $ionicHistory.clearHistory();
     	$state.go('tabs.menu.forms');
     };
 

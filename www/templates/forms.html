@@ -12,21 +12,21 @@
   <div class="item item-input section-select has-header">
     <div class="input-label section-select-left">Section</div>
     <div class="section-select-wrapper">
-      <div class="section-list" ng-click="popover.show($event)">&nbsp;{{temp.section.title}}</div>
-      <i class="button button-icon ion-arrow-down-b section-list" ng-click="popover.show($event)"></i>
+      <div ng-click="popover.show($event)">&nbsp;{{temp.section.title}}</div>
+      <i class="button button-icon ion-arrow-down-b" ng-click="popover.show($event)"></i>
     </div>
     <i class="ion-record section-select-right" ng-style="temp.section.sStatusStyle"></i>
   </div>
 
+  <div class="item item-input section-select has-header" style="top: 84px; padding: 0px;">
+    <ion-toggle style="width: 100%; border: none" ng-model="temp.section.bCompleted" toggle-class="toggle-balanced" ng-change="onChangeStatus()">Completed</ion-toggle>
+  </div>
+
   <ion-content class="section-content" delegate-handle="my-handle">
 
-    <div class="section-mask" ng-show="menus.bLock">
+    <div class="section-mask" ng-show="temp.section.bCompleted">
     </div>
-
-    <!-- you can use lock by using menus.bLock-->
-    
-    <ion-toggle ng-model="temp.section.bCompleted" toggle-class="toggle-balanced" ng-change="onChangeStatus()">Completed</ion-toggle>
-
+    <div style="width: 100%; height: 40px;"></div>
     <div ng-repeat="section in temp.section.sections">
       <div class="item section-title" ng-if="section.title != null"> {{section.title.FR}} </div>
       <div ng-repeat = "subsec in section.subsections" ng-if="(subsec.bHidden == undefined) == true || subsec.bHidden == false">
@@ -61,14 +61,14 @@
                 <div ng-if="mem.type == 'DATE-DAY'">
                   <label class="item item-input item-stacked-label">
                     <span class="input-label">{{mem.title.FR}}</span>
-                    <input type="date" ng-model="mem.value" ng-change="onDay(mem)" format-date>
+                    <input type="date" ng-model="mem.value" ng-change="onDay(mem);onChange()" format-date>
                   </label>
                 </div>
 
                 <div ng-if="mem.type == 'DAY'">
                   <label class="item item-input item-stacked-label">
                     <span class="input-label">{{mem.title.FR}}</span>
-                    <input type="text" ng-model="mem.value" ng-change="onChange()">
+                    <input type="text" ng-model="mem.value" ng-change="onChange()" ng-readonly="true">
                   </label>
                 </div>
 
@@ -76,7 +76,7 @@
                   <label class="item item-input item-stacked-label">
                     <span class="input-label">{{mem.title.FR}}</span>
                     <ionic-timepicker input-obj="timePickerObject">
-                      <input type="text" ng-model="mem.value" ng-click = "onTime(mem)">
+                      <input type="text" ng-model="mem.value" ng-click = "onTime(mem);onChange()">
                     </ionic-timepicker>
                   </label>
                 </div>
@@ -84,7 +84,7 @@
                 <div ng-if="mem.type == 'RADIO'">
                   <label class="item item-input item-stacked-label">
                     <span class="input-label"> {{mem.title.FR}} </span>
-                    <ion-radio-fix ng-repeat="c in mem.items" ng-change="onChange()" ng-model="mem.value" ng-value="c.val">{{c.title.FR}}</ion-radio-fix>
+                    <ion-radio-fix ng-repeat="c in mem.items" ng-change="onChange()" ng-model="mem.value" ng-value="c.val" name="{{mem.title.FR}}">{{c.title.FR}}</ion-radio-fix>
                   </label>
                 </div>
 
@@ -105,7 +105,7 @@
                 <div ng-if="mem.type == 'OPTION'">
                   <label class="item item-input item-stacked-label item-option">
                     <span class="input-label"> {{mem.title.FR}} </span>
-                    <select ng-model="mem.value" ng-init="mem.value=mem.value||mem.items[0].val;onOptioned(mem, 1)" ng-options="c.val as c.title.FR for c in mem.items" ng-change="onOptioned(mem)"></select>
+                    <select ng-model="mem.value" ng-init="mem.value=mem.value||mem.items[0].val;onOptioned(mem, 1)" ng-options="c.val as c.title.FR for c in mem.items" ng-change="onOptioned(mem);onChange()"></select>
                     <label ng-if="mem.items[mem.value].description != null">{{mem.items[mem.value].description.FR}}</label>
                   </label>
                 </div>
@@ -138,7 +138,7 @@
           <div ng-if="member.type == 'OPTION'">
             <label class="item item-input item-stacked-label item-option">
               <span class="input-label"> {{member.title.FR}} </span>
-              <select ng-model="member.value" ng-init="member.value=member.value||member.items[0].val;onOptioned(member, 1)" ng-options="c.val as c.title.FR for c in member.items" ng-change="onOptioned(member)"></select>
+              <select ng-model="member.value" ng-init="member.value=member.value||member.items[0].val;onOptioned(member, 1)" ng-options="c.val as c.title.FR for c in member.items" ng-change="onOptioned(member);onChange()"></select>
               <label ng-if="member.items[member.value].description != null">{{member.items[member.value].description.FR}}</label>
             </label>
           </div>
@@ -146,15 +146,15 @@
           <div ng-if="member.type == 'RADIO'">
             <label class="item item-input item-stacked-label">
               <span class="input-label"> {{member.title.FR}} </span>
-              <ion-radio-fix ng-repeat="c in member.items" ng-model="member.value" ng-value="c.val" ng-change="onOptioned(member)">{{c.title.FR}}</ion-radio-fix>
+              <ion-radio-fix ng-repeat="c in member.items" ng-model="member.value" ng-value="c.val" ng-change="onOptioned(member);onChange()" name="{{member.title.FR}}">{{c.title.FR}}</ion-radio-fix>
             </label>
           </div>
 
           <div ng-if="member.type == 'CHECKBOX'">
-            <label class="item item-input item-stacked-label">
+            <div class="item item-input item-stacked-label">
               <span class="input-label"> {{member.title.FR}} </span>
-              <ion-checkbox ng-repeat="c in member.items" ng-model="c.value" ng-click="onChecked(c)" ng-if="(c.bHidden == undefined) == true || c.bHidden == false">{{c.title.FR}}</ion-checkbox>
-            </label>
+              <ion-checkbox ng-repeat="c in member.items" ng-model="c.value" ng-click="onChecked(c, member)" ng-if="(c.bHidden == undefined) == true || c.bHidden == false">{{c.title.FR}}</ion-checkbox>
+            </div>
           </div>
 
           <div ng-if="member.type == 'SIGN'">

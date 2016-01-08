@@ -1,18 +1,18 @@
-MyApp.controller('DraftCtrl', function($scope, $ionicLoading, $ionicTabsDelegate, $http, $ionicPopup, $ionicHistory, $state, $timeout, gApp, Utils) {
+MyApp.controller('DraftCtrl', function($scope, $ionicTabsDelegate, $http, $ionicPopup, $ionicHistory, $state, $timeout, gApp, Utils) {
     // event whenever enter the home screen.
     $scope.$on('$ionicView.enter', function(viewInfo, state) {
         gApp.loadAllInfo();
-        gApp.bFromPatients = 2;
         $scope.patients = gApp.patients.list;
-        $ionicLoading.hide();
     });
 
     $scope.onPatients = function(pa, index){
         gApp.patient = pa;
         gApp.patient.bMnuID = index;
+        gApp.bForm = true;
 
+        $ionicHistory.clearHistory();
         $ionicTabsDelegate.select(0);
-        $ionicLoading.show();
+        
         $state.go('tabs.menu.forms');
     };
 
