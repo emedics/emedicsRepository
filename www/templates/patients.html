@@ -18,12 +18,14 @@
       <i class="clear-search icon ion-ios-close-empty" ng-click="onClear()" ng-show="model.searchFilter.length"></i>
     </div>
 
-    <div class="patient-list" ng-repeat="pat in patients|filter:{name:model.searchFilter}|orderBy:model.sort:model.direct">
+    <div class="patient-list" ng-repeat="pat in items|filter:{name:model.searchFilter}|orderBy:model.sort:model.direct">
       <div class="item" ng-click="onPatients(pat)">
         <div class="item-name">{{pat.name}}</div>
         <div class="item-date">{{pat.date |date:'yyyy-MM-dd &nbsp;&nbsp;HH:mm:ss'}}</div>
       </div>
     </div>
+
+    <ion-infinite-scroll ng-if="!noMoreItemsAvailable" on-infinite="loadMore()" distance="10%"></ion-infinite-scroll>
   </ion-content>
 
 </ion-view>

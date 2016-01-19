@@ -11,7 +11,11 @@ MyApp.controller('LoginCtrl', function($scope, $ionicPopup, $ionicScrollDelegate
         var password = $('#login-password').val();
 
         if (Utils.isEmptyString(userName)) {
-            Utils.alertPopup("Warning", "Please enter your user name.");
+            Utils.alertPopup("Warning", "Please enter your email.");
+            return;
+        }
+        if (!Utils.isValidEmailFormat(userName)){
+            Utils.alertPopup("Warning", "Email is not valid. Please enter your correct email.");
             return;
         }
         if (Utils.isEmptyString(password)) {

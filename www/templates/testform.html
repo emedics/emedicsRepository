@@ -12,7 +12,7 @@
       <div ng-if="member.type == 'STRING'">
         <label class="item item-input item-stacked-label">
           <span class="input-label">{{member.title.FR}}</span>
-          <input type="text" ng-model="member.value" ng-change="onChange()">
+          <input type="text" ng-model="member.value" ng-change="onChange()" maxlength="{{member.maxlength}}">
         </label>
       </div>
 

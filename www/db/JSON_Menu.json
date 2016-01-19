@@ -12,11 +12,6 @@
 			"title" : "Section CC(Annexe A)",
 			"aneID" : 0,
 			"secID" : 2
-		},
-		{
-			"title" : "All sections of Annexe D",
-			"aneID" : 3,
-			"secID" : -1
 		}]
 	},
 	{
@@ -189,6 +184,15 @@
 			"title" : "Section U8(Annexe B)",
 			"aneID" : 1,
 			"secID" : 7
+		}]
+	},
+	{
+		"title" :{"FR" : "EXIT FORM"},
+		"sections" :[
+		{
+			"title" : "All sections of Annexe D",
+			"aneID" : 3,
+			"secID" : -1
 		}]
 	}]
 }

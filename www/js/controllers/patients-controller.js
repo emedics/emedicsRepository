@@ -1,4 +1,3 @@
-
 MyApp.controller('PatientsCtrl', function($scope, $ionicViewSwitcher, $http, $ionicPopup, $ionicHistory, $state, $timeout, gApp, Utils) {
     // event whenever enter the home screen.
     $scope.$on('$ionicView.enter', function(viewInfo, state) {
@@ -12,8 +11,11 @@ MyApp.controller('PatientsCtrl', function($scope, $ionicViewSwitcher, $http, $io
         $scope.bSearch = 0;
         $scope.bOrder = -1;
         $scope.personSearch = {name:''};
+        $scope.noMoreItemsAvailable = false;
+        $scope.items = [];
         gApp.loadAllInfo();
         $scope.patients = gApp.patients.list;
+        $scope.loadMore();
     });
 
     $scope.onNew = function(){
@@ -49,5 +51,14 @@ MyApp.controller('PatientsCtrl', function($scope, $ionicViewSwitcher, $http, $io
             $scope.model.sort = 'name';
         $scope.bOrder = ($scope.bOrder + 1) % 2;
         $scope.model.direct = $scope.bOrder;
+    };
+  
+    $scope.loadMore = function() {
+        $scope.items.push(gApp.patients.list[$scope.items.length]);
+   
+        if ( $scope.items.length == gApp.patients.list.length ) {
+            $scope.noMoreItemsAvailable = true;
+        }
+        $scope.$broadcast('scroll.infiniteScrollComplete');
     };
 })

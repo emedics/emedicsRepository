@@ -4,7 +4,9 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 	$scope.bNew = 0;
 	var bActive = true;
 	$scope.$on('$ionicView.enter', function() {
+		$scope.selectedRow = 0;
 		$ionicViewSwitcher.nextDirection('previous');
+		$ionicLoading.hide();
 		$scope.timePickerObject = {
 		  inputEpochTime: ((new Date()).getHours() * 60 * 60),  //Optional
 		  step: 15,  //Optional
@@ -149,6 +151,8 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 	}
 
 	$scope.onBack = function(){
+		gApp.bForm = false;
+		bActive = false;
 		if (isChanged() === true)
 		{
 			Utils.confirmPopupYesNo('Warning', 'Do you want to save current working form now?', 
@@ -173,6 +177,7 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
     		nInd = 0;
     	}
     	else $scope.popover.hide();
+    	if ($scope.nCurInd == nInd) return;
     	$scope.nCurInd = nInd;
 	    $scope.temp.section = $scope.selsections[nInd];
 	    $scope.onTop(true);
@@ -191,17 +196,20 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		{
 			Utils.confirmPopupYesNo('Warning', 'Do you want to save current working form now?', 
 				function(){
+					$ionicLoading.show();
 					$scope.saveToStorage();
 					gApp.patient.bMnuID = index;
 					$state.go($state.current, {}, {reload: true});
 		       	},
 		       	function(){
+		       		$ionicLoading.show();
 		       		gApp.patient.bMnuID = index;
 		       		$state.go($state.current, {}, {reload: true});
 		       	});
 		}
 		else
 		{
+			$ionicLoading.show();
 			gApp.patient.bMnuID = index;
 			$state.go($state.current, {}, {reload: true});
 		}
@@ -357,8 +365,9 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		}
 		if (sitem.value === true && $scope.bLock === true)
 		{
-			sitem.value = false;
-			return;
+			unCheck(member);
+			sitem.value = true;
+			$scope.bLock = false;
 		}
 		if (sitem.type === "GOTO" && sitem.value === true) 
 		{
@@ -392,7 +401,7 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
 		var item = sitem.items.filter(function(obj){
 			return obj.val === sitem.value;
 		})[0];
-		if (item.type != "SHIDE" && item.type != "GOTO") return;
+		if (typeof item === "undefined" || (item.type != "SHIDE" && item.type != "GOTO")) return;
 		var nInd = item.flow.indexOf(','), value = true;
 
 		if (sitem.type === "RADIO") value = item.value;
@@ -478,4 +487,8 @@ MyApp.controller('FormsCtrl', function($scope, $ionicLoading, $ionicPopover, $io
       }
       return param;
   	}
+    // initialize our variable to null
+	$scope.setClickedRow = function(index){  //function that sets the value of selectedRow to current index
+    	$scope.selectedRow = index;
+	}
 })
